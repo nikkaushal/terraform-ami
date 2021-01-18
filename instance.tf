@@ -50,7 +50,7 @@ resource "null_resource" "provisioner" {
 }
 
 resource "aws_ami_from_instance" "ami" {
-  depends_on = [null_resource.provisioner]
+  depends_on             = [null_resource.provisioner]
   name                   = var.COMPONENT
   source_instance_id     = aws_instance.ami_instance.id
 }
