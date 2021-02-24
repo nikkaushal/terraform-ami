@@ -37,8 +37,8 @@ resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
     connection {
       host              = aws_instance.ami_instance.public_ip
-      user              = "root"
-      password          = "DevOps321" //hardcoding user id and pwd in code is not a good practise and causes securty breaches
+      user              = jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["SSH_USER"]
+      password          = jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["SSH_PASS"] //hardcoding user id and pwd in code is not a good practise and causes securty breaches
     }
     inline = [
       "yum install make -y",
