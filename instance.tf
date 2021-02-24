@@ -42,7 +42,7 @@ resource "null_resource" "provisioner" {
     }
     inline = [
       "sudo yum install ansible -y",
-      "ansible-pull -i localhost, -U https://github.com/nikkaushal/ansible.git roboshop-project/roboshop.yml -var ENV=${var.ENV} -var component=${var.COMPONENT}"
+      "ansible-pull -i localhost, -U https://github.com/nikkaushal/ansible.git roboshop-project/roboshop.yml -e ENV=${var.ENV} -e component=${var.COMPONENT}"
     ]
   }
 }
