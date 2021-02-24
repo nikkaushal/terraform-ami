@@ -41,10 +41,8 @@ resource "null_resource" "provisioner" {
       password          = jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["SSH_PASS"] //hardcoding user id and pwd in code is not a good practise and causes securty breaches
     }
     inline = [
-      "yum install make -y",
-      "git clone https://github.com/nikkaushal/shell-scripting.git",
-      "cd shell-scripting/roboshop-project",
-      "make ${var.COMPONENT}"
+
+      "ansible-pull -i localhost, -U https://github.com/nikkaushal/ansible.git roboshop-project/roboshop.yml -var ENV=dev -var component=${var.COMPONENT}"
     ]
   }
 }
