@@ -4,7 +4,7 @@ data "aws_ami" "ami" {
 }
 
 data "aws_secretsmanager_secret" "secrets" {
-  name                = "roboshop-dev"
+  name                = "roboshop-${var.ENV}"
 }
 
 data "aws_secretsmanager_secret_version" "creds" {
