@@ -34,6 +34,10 @@ resource "aws_security_group" "allow-ssh" {
 }
 
 resource "null_resource" "provisioner" {
+  //a little hack to run this resource everytime
+  triggers = {
+     abc= timestamp()
+  }
   provisioner "remote-exec" {
     connection {
       host              = aws_instance.ami_instance.public_ip
